@@ -63,6 +63,7 @@ public class HoverOverBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         timestamp = Time.time;
         isOver = true;
+        Debug.Log("Pointer entered HoverOverUI element.");
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

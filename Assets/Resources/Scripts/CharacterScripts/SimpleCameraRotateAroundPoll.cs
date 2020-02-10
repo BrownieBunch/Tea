@@ -8,6 +8,7 @@ public class SimpleCameraRotateAroundPoll : MonoBehaviour
     //Will have a mousewheel for zoom in / zoom out
     public float zoomSensitivity;
     public Vector2 zoomBounds;
+    public Vector2 heightRange;
 
     //Will have keyboard to move camera left right and up and down 
     public float turnSensitivity;
@@ -25,20 +26,20 @@ public class SimpleCameraRotateAroundPoll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         CameraZoom();
-        CameraTurnAroundAxis();
-       // CameraMoveUpDown();
+        CameraRotateAroundTarget();
+        CameraHeightChangeAimed();
     }
 
     private void LateUpdate()
     {
-        
+
     }
 
     void CameraZoom()
@@ -53,43 +54,40 @@ public class SimpleCameraRotateAroundPoll : MonoBehaviour
     }
 
 
-    void CameraTurnAroundAxis()
+    void CameraRotateAroundTarget()
     {
         parent.transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal"), 0) * turnSensitivity, Space.World);
     }
 
-    void CameraMoveUpDown()
+    void CameraHeightChangeAimed()
+    {
+        Vector3 height = new Vector3(0, Input.GetAxis("Vertical"), 0) * pitchSensitivity;
+        float yvalue = transform.position.y;
+        float newYvalue = transform.position.y + height.y;
+
+        if ((newYvalue > heightRange.x) && (newYvalue < heightRange.y) )
+        {
+            transform.position += height;
+            transform.LookAt(this.transform.parent);
+        }
+    }
+
+    void CameraAim()
     {
         if (Input.GetAxis("Vertical") > 0)
-        { 
-        Vector3 height = new Vector3(0, Input.GetAxis("Vertical"), 0) * pitchSensitivity;
-        transform.position += height;
-
-        float heightAB = height.magnitude;
-        float xvalue = transform.localPosition.x;
-        float zvalue = transform.localPosition.z;
-        float hypothenuse = Mathf.Sqrt(Mathf.Pow(xvalue, 2) + Mathf.Pow(zvalue, 2));
-        // aim at thingie: distance of root from XZ position of target = hypotenuse
-        // side = input * turn, Y distance
-        // cot = height / hypothenuse > angle = 
-        float angleRad = Mathf.Acos(heightAB / hypothenuse);
-        float angleDeg = angleRad * Mathf.Rad2Deg;
-        Vector3 angleTurn = new Vector3(angleDeg, 0, 0);
-            // if (angleDeg > 0)
-            //   transform.Rotate(angleTurn, Space.Self);
-            /*
-            if (rotationAroundXaxis < 180 && rotationAroundXaxis > 0)
-            {
-                rotationAroundXaxis = Mathf.Clamp(rotationAroundXaxis, 0, 90);
-            }
-            else if (rotationAroundXaxis < 360 && rotationAroundXaxis > 180)
-            {
-                rotationAroundXaxis = Mathf.Clamp(rotationAroundXaxis, 270, 360);
-            }
-
-            cameraRotationEuler = new Vector3(rotationAroundXaxis, 0, 0);
-            */ 
-
+        {
+            Vector3 height = new Vector3(0, Input.GetAxis("Vertical"), 0) * pitchSensitivity;
+            float heightAB = height.magnitude;
+            float xvalue = transform.localPosition.x;
+            float zvalue = transform.localPosition.z;
+            float hypothenuse = Mathf.Sqrt(Mathf.Pow(xvalue, 2) + Mathf.Pow(zvalue, 2));
+            Debug.Log("Camera X " + xvalue);
+            Debug.Log("Camera Z " + zvalue);
+            Debug.Log("Distance from root" + hypothenuse);
+            Debug.Log("Camera moved upwards a height of " + heightAB);
+            float angleRad = Mathf.Atan2(heightAB, hypothenuse);
+            float angleDeg = angleRad * Mathf.Rad2Deg;
+            Debug.Log("Angle is " + angleDeg);
         }
     }
 }

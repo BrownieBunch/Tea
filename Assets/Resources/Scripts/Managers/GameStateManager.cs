@@ -14,6 +14,11 @@ public class GameStateManager : MonoBehaviour
     //project specific events
     public event Action BrownieDeathEvent;
 
+
+
+    void Awake()
+    {
+    }
     // Use this for initialization
     void Start()
     {
@@ -23,6 +28,20 @@ public class GameStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
+
+    public void TogglePause(bool PausedOrNot)
+    {
+        if (PausedOrNot)
+        { 
+        if (GamePausedEvent != null)
+        { GamePausedEvent(); }
+        }
+    else
+        {
+            if (GameUnPausedEvent != null)
+            { GameUnPausedEvent(); }
+        }
+    }
+  
 }

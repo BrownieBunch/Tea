@@ -23,6 +23,11 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField]
     bool isConfirm;
 
+    public bool showGameObject;
+    public bool hidesParentGameObject;
+    public GameObject popUpGameObject;
+    public GameObject hideGameObject;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -70,6 +75,24 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         {
             audioManagerSoundEffects.PlaySoundEffect(cancelOnClick);
         }
+
+        if (showGameObject)
+        {
+            ShowPopUp();
+        }
+        else if (hidesParentGameObject)
+        {
+            HideParentGameObject();
+        }
     }
 
+    void ShowPopUp()
+    {
+        popUpGameObject.SetActive(true);
+    }
+    void HideParentGameObject()
+    {
+        hideGameObject.SetActive(false);
+        //this.transform.parent.gameObject.SetActive(false);
+    }
 }

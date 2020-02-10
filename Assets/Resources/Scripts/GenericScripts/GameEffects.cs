@@ -101,6 +101,9 @@ namespace GameEffects
     }
     public static class Fade
     {
+
+
+
         public static class SpriteFadeScript
         {
             public static IEnumerator FadeInLinearly(GameObject go, float startingalpha, float maxalpha, float durationInSeconds)
