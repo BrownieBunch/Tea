@@ -39,20 +39,14 @@ public class AudioManagerSoundEffects : MonoBehaviour
     //used for reloading whatever the current scene is
     public AudioClip gameReload;
 
-    public Dictionary<int, AudioClip> sceneToSoundMatch = new Dictionary<int, AudioClip>();
-
     AudioSource audioSource;
     public AudioMixerGroup audioMixerGroupMusic;
 
     public Slider slider;
-
-    
-    
+ 
     GameStateManager gameStateManager;
        
     SceneManagerLocal sceneManagerLocal;
-
-    Player player;
 
     private void Awake()
     {
@@ -69,15 +63,6 @@ public class AudioManagerSoundEffects : MonoBehaviour
                 slider = thisSlider;
         }
 
-        //there is only one of these:
-        player = FindObjectOfType<Player>();
-
-
-        //subscribe methods to events:
-        if (player != null)
-        { 
-        //player.playerDeathEvent += PlayerDeathSoundEffect;
-        }
 
         //there is only one of these:
         gameStateManager = FindObjectOfType<GameStateManager>();
@@ -93,14 +78,7 @@ public class AudioManagerSoundEffects : MonoBehaviour
 
     private void Start()
     {
-        //fill the dictionary: 
-        sceneToSoundMatch.Add(sceneManagerLocal.introSceneIndex, gameStart);
-        sceneToSoundMatch.Add(sceneManagerLocal.tutorialSceneIndex, gamePlay);
-        sceneToSoundMatch.Add(sceneManagerLocal.mainSceneIndex, gamePlay);
-        sceneToSoundMatch.Add(sceneManagerLocal.outroSceneIndex, gameExit);
-        //special codes in the dictionary (see SceneManagerLocal for more info):
-        sceneToSoundMatch.Add(sceneManagerLocal.reloadCode, gameReload);
-        sceneToSoundMatch.Add(sceneManagerLocal.quitCode, gameQuit);
+
     }
 
 
@@ -122,13 +100,6 @@ public class AudioManagerSoundEffects : MonoBehaviour
     }
 
 
-    //plays one time the audioClip that matches the sceneIndex according to a dictionary and returns the length of the clip. 
-    //this method speaks to the SceneManagerLocal script.
-    public float SceneSwitchSoundEffect(int sceneIndex)
-    {
-        PlaySoundEffect(sceneToSoundMatch[sceneIndex]);
-        return sceneToSoundMatch[sceneIndex].length;    
-    }
 
     //for events!
     void GameWonSoundEffect()

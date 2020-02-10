@@ -13,22 +13,9 @@ public class SceneManagerLocal : MonoBehaviour
 
     float delayDuration;
 
-    public int introSceneIndex = 0;
-    public int tutorialSceneIndex = 1;
-    public int mainSceneIndex = 3;
-    public int outroSceneIndex;
-    public int currentSceneIndex;
-    public int reloadCode  = 12;
-    public int quitCode = 13;
-    
     private void Awake()
     {
-        //needs to be computed during runtime:
-        outroSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        //Sets the default state of the cursor, because in case a player returns to this screen from 3d mode, the cursor will still be locked!
-        Cursor.lockState = CursorLockMode.None;
-        //only one of these in every scene:
+   
         audioManagerSoundEffects = FindObjectOfType<AudioManagerSoundEffects>();
         audioManagerAmbient = FindObjectOfType<AudioManagerAmbientMusic>();
         gameStateManager = FindObjectOfType<GameStateManager>();
@@ -47,20 +34,8 @@ public class SceneManagerLocal : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         //have the music stop before the sound effect starts!
         audioManagerAmbient.FadeOutSound(0.5f);
-        //start the sound effect and get its duration to the variable delayDuration ('SceneSwitchSoundEffect' returns float)
-        AudioClip pertinentAudioClip;
-        if (audioManagerSoundEffects.sceneToSoundMatch.TryGetValue(sceneIndex, out pertinentAudioClip))
-        {
-            audioManagerSoundEffects.SceneSwitchSoundEffect(sceneIndex);
-            delayDuration = pertinentAudioClip.length;
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        else
-        {
-            delayDuration = 0.5f;
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        StartCoroutine(DelayCoroutine(delayDuration, sceneIndex));
+        SceneManagerStatic.LoadNScene(sceneIndex);
+
     }
 
     IEnumerator DelayCoroutine(float delayDuration, int sceneIndex)
@@ -79,35 +54,29 @@ public class SceneManagerLocal : MonoBehaviour
     //All these are public because they are called from button clicks of the UI!
     public void ToIntro()
     {
-        ChangeScene(introSceneIndex);
-    }
-
-    public void ToTutorialIntro()
-    {
-        ChangeScene(tutorialSceneIndex);
-    }
-
-    public void ToTutorialGamePlay()
-    {
-        SceneManagerStatic.LoadNextScene();
+        ChangeScene(0);
     }
 
     public void ToMainGame()
     {
-        ChangeScene(mainSceneIndex);
+        ChangeScene(1);
     }
 
     public void ToOutro()
     {
-        Debug.Log("outroSceneIndex is " + outroSceneIndex);
-        ChangeScene(outroSceneIndex);
     }
 
     //special transitions:
 
     public void Reload()
     {
-        Debug.Log("Loading screen scene index is " + currentSceneIndex);
+
+        SceneManagerStatic.ReloadScene();
+
+
+        Debug.Log("Loading screen scene index is " + SceneManager.GetActiveScene().buildIndex);
+     
+
         IEnumerator SpecialDelayRoutine(float delayDuration, int sceneIndex)
         {
             Debug.Log("Coroutine entry");
@@ -116,33 +85,15 @@ public class SceneManagerLocal : MonoBehaviour
             SceneManagerStatic.ReloadScene();
         }
 
-
-        //same code with previous: 
-        //no more buttons clicked after this:
-        Cursor.lockState = CursorLockMode.Locked;
-        //have the music stop before the sound effect starts!
-        audioManagerAmbient.FadeOutSound(0.5f);
-
-        //start the sound effect and get its duration to the variable delayDuration ('SceneSwitchSoundEffect' returns float)
-        AudioClip pertinentAudioClip;
-        if (audioManagerSoundEffects.sceneToSoundMatch.TryGetValue(reloadCode, out pertinentAudioClip))
-        {
-            delayDuration = pertinentAudioClip.length;
-            audioManagerSoundEffects.SceneSwitchSoundEffect(reloadCode);
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        else
-        {
-            delayDuration = 0.5f;
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        StartCoroutine(SpecialDelayRoutine(delayDuration, currentSceneIndex));
     }
 
 
     public void LoadNextLevel()
     {
-        Debug.Log("Loading screen scene index is " + currentSceneIndex + 1 );
+        Debug.Log("Loading screen scene index is " + (SceneManager.GetActiveScene().buildIndex + 1));
+        SceneManagerStatic.LoadNextScene();
+
+
         IEnumerator SpecialDelayRoutine2(float delayDuration)
         {
             Debug.Log("Coroutine entry");
@@ -150,31 +101,12 @@ public class SceneManagerLocal : MonoBehaviour
             Debug.Log("Coroutine Exit");
             SceneManagerStatic.LoadNextScene();
         }
-
-        //same code with previous: 
-        //no more buttons clicked after this:
-        Cursor.lockState = CursorLockMode.Locked;
-        //have the music stop before the sound effect starts!
-        audioManagerAmbient.FadeOutSound(0.5f);
-
-        //start the sound effect and get its duration to the variable delayDuration ('SceneSwitchSoundEffect' returns float)
-        AudioClip pertinentAudioClip;
-        if (audioManagerSoundEffects.sceneToSoundMatch.TryGetValue(reloadCode, out pertinentAudioClip))
-        {
-            delayDuration = pertinentAudioClip.length;
-            audioManagerSoundEffects.SceneSwitchSoundEffect(reloadCode);
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        else
-        {
-            delayDuration = 0.5f;
-            Debug.Log("delayDuration" + delayDuration);
-        }
-        StartCoroutine(SpecialDelayRoutine2(delayDuration));
     }
 
     public void Quit()
     {
+        SceneManagerStatic.GameQuit();
+        /*
         IEnumerator SpecialDelayRoutine3(float delayDuration)
         {
             Debug.Log("Coroutine entry");
@@ -183,10 +115,7 @@ public class SceneManagerLocal : MonoBehaviour
             SceneManagerStatic.GameQuit();
         }
 
-        //same code with previous: 
-        //no more buttons clicked after this:
         Cursor.lockState = CursorLockMode.Locked;
-        //have the music stop before the sound effect starts!
         audioManagerAmbient.FadeOutSound(0.5f);
 
         //start the sound effect and get its duration to the variable delayDuration ('SceneSwitchSoundEffect' returns float)
@@ -202,8 +131,10 @@ public class SceneManagerLocal : MonoBehaviour
             delayDuration = 0.5f;
             Debug.Log("delayDuration" + delayDuration);
         }
-        StartCoroutine(SpecialDelayRoutine3(delayDuration));
 
+        StartCoroutine(SpecialDelayRoutine3(delayDuration));
+    */
     }
+
 
 }
