@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //This script controls movement of player in first person/3D mode.
-[RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public class FPMovement : Player
+
+// Walking speed. Running Speed. Should running be shift + navigationals? 
+// Smooth transitions with GetAxis Raw and then Lerping? 
+
+
+public class FPMovement : CharacterController
 {
+
+    public bool isWalking;
+    public bool isRunning;
 
     public override void Awake()
     {
@@ -25,9 +32,39 @@ public class FPMovement : Player
     Vector3 forward = transform.forward * Input.GetAxis("Vertical");
     Vector3 sideways = transform.right * Input.GetAxis("Horizontal");
 
-    Vector3 translation = (forward + sideways) * speed * Time.fixedDeltaTime;
+        Vector3 translation = (forward + sideways) ;
+        float speed = 0;
 
-    Vector3 finalPosition = GetComponent<Rigidbody>().position + translation;
-    GetComponent<Rigidbody>().MovePosition(finalPosition);
+        if (translation.magnitude > 0)
+        {
+        
+            if (Input.GetKey(KeyMap.runningKey))
+            {
+                speed = runningSpeed;
+                isRunning = true;
+                isWalking = false;
+
+            }
+            else
+            {
+                speed = walkingSpeed;
+                isWalking = true;
+                isRunning = false;
+            }
+        }
+        else
+        { 
+            isWalking = false; 
+            isRunning = false; 
+        }
+
+    Vector3 finalTranslation = (forward + sideways) * speed * Time.fixedDeltaTime;
+
+    Vector3 finalPosition = rigidbody.position + finalTranslation;
+      
+
+        rigidbody.MovePosition(finalPosition);
     }
+
+    
 }

@@ -15,7 +15,7 @@ using System.Windows;
 //https://www.youtube.com/watch?v=_QajrabyTJc
 
 
-public class FPLookAround : Player
+public class FPLookAround : CharacterController
 {
     Camera followCamera;
     Transform playerTransform;

@@ -26,7 +26,6 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     public bool showGameObject;
     public bool hidesParentGameObject;
     public GameObject popUpGameObject;
-    public GameObject hideGameObject;
 
     // Start is called before the first frame update
     void Awake()
@@ -92,7 +91,22 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     }
     void HideParentGameObject()
     {
-        hideGameObject.SetActive(false);
-        //this.transform.parent.gameObject.SetActive(false);
+        GameObject parentScreen;
+        RectTransform[] parents =  GetComponentsInParent<RectTransform>();
+
+        foreach (RectTransform thisParent in parents)
+        {
+            if (thisParent.gameObject.tag == "FullScreenOverLay")
+            {
+                parentScreen = thisParent.gameObject;
+                parentScreen.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("FullScreenOverLay Screen not found.");
+            }
+
+        }
+
     }
 }

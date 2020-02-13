@@ -29,7 +29,12 @@ public class BlackScreenFadeControl : MonoBehaviour
 
 
 
-        // public IEnumerator FadeIn(float startingAlpha )
+    /*  public IEnumerator FadeIn(float startingAlpha, float endingAlpha, float duration)
+    {
 
+        //yield return new WaitForSeconds();
+
+    }
+    */
 
 }
