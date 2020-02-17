@@ -44,7 +44,7 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         //I added this line to check if the game loads faster with direct assignment or not
         if (takesFocus == null || losesFocus == null || confirmOnClick == null || cancelOnClick == null)
         { 
-        AudioClip[] soundEffects = Resources.LoadAll<AudioClip>("Audio\\Sounds\\UI SoundEffects\\ButtonSounds");
+        AudioClip[] soundEffects = UnityEngine.Resources.LoadAll<AudioClip>("Audio\\Sounds\\UI SoundEffects\\ButtonSounds");
         takesFocus = soundEffects[0];
         losesFocus = soundEffects[1];
         confirmOnClick = soundEffects[2];
