@@ -8,6 +8,8 @@ public class ToggleUIFeature : MonoBehaviour
     //pause screen is removed
     public GameObject UIScreen;
 
+    public GameObject[] otherUIScreens;
+
     //to keep an overview of input keys and not search through scripts
     KeyCode pauseGameKey = KeyMap.pauseGameKey;
 
@@ -16,8 +18,6 @@ public class ToggleUIFeature : MonoBehaviour
     void Awake()
     {
         gameStateManager = FindObjectOfType<GameStateManager>();
-
-      //PauseScreen = GameObject.Find("PauseScreen");
     }
 
     void Update()
@@ -68,6 +68,12 @@ public class ToggleUIFeature : MonoBehaviour
         //nope, this works like shit> 
         //   if (Input.GetAxisRaw("TogglePause") == 1)
        if (Input.GetKeyDown(pauseGameKey))
-        { TogglePause(); }
+        { 
+            TogglePause();
+            foreach (var go in otherUIScreens)
+            {
+                go.SetActive(false);
+            }
+        }
     }
 }

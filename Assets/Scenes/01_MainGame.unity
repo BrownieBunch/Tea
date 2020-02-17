@@ -239,11 +239,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169289285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.76, y: 2.06, z: -3.87}
+  m_LocalPosition: {x: -104.29, y: 2.06, z: -3.87}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &169289292
 MonoBehaviour:
@@ -393,11 +393,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181559078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.15, y: 2.06, z: -19.85}
+  m_LocalPosition: {x: -89.68, y: 2.06, z: -19.85}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392651122
 GameObject:
@@ -482,7 +482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &415581091
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -828,11 +828,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670379780}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.17, y: 2.52, z: -12.55}
+  m_LocalPosition: {x: -99.7, y: 2.52, z: -12.55}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &800436211
 PrefabInstance:
@@ -1070,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 2997490263810401624, guid: b66a4b119612b408f9a1d66aea76a884,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.77
+      value: -105.7
       objectReference: {fileID: 0}
     - target: {fileID: 2997490263810401624, guid: b66a4b119612b408f9a1d66aea76a884,
         type: 3}
@@ -1080,7 +1080,7 @@ PrefabInstance:
     - target: {fileID: 2997490263810401624, guid: b66a4b119612b408f9a1d66aea76a884,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -36.4
       objectReference: {fileID: 0}
     - target: {fileID: 2997490263810401624, guid: b66a4b119612b408f9a1d66aea76a884,
         type: 3}
@@ -1127,6 +1127,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1959839206, guid: b66a4b119612b408f9a1d66aea76a884, type: 3}
+      propertyPath: isGrounded
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2997490263454571067, guid: b66a4b119612b408f9a1d66aea76a884,
         type: 3}
       propertyPath: m_AllowMSAA
@@ -1136,6 +1140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderingPath
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817771046875785440, guid: b66a4b119612b408f9a1d66aea76a884,
+        type: 3}
+      propertyPath: jumpingForce
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b66a4b119612b408f9a1d66aea76a884, type: 3}
@@ -1584,11 +1593,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910270456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.77, y: 1.96, z: -8.03}
+  m_LocalPosition: {x: -115.3, y: 1.96, z: -8.03}
   m_LocalScale: {x: 1.9502316, y: 1.9502316, z: 1.9502316}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &954347596
 GameObject:
@@ -1725,12 +1734,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954347596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.17, y: 2.52, z: -12.55}
+  m_LocalPosition: {x: -99.7, y: 2.52, z: -12.55}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 625398769}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1046307636
 GameObject:
@@ -1848,6 +1857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIScreen: {fileID: 8830191243490729241}
+  otherUIScreens: []
 --- !u!1001 &1057887722
 PrefabInstance:
   m_ObjectHideFlags: 0
