@@ -2434,7 +2434,9 @@ GameObject:
   - component: {fileID: 1455270937}
   - component: {fileID: 1455270936}
   - component: {fileID: 1455270939}
-  m_Layer: 0
+  - component: {fileID: 1455270941}
+  - component: {fileID: 1455270940}
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -2481,12 +2483,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -2523,6 +2525,83 @@ MonoBehaviour:
   heightRange: {x: 1, y: 200}
   turnSensitivity: 1
   pitchSensitivity: 1
+--- !u!114 &1455270940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455270935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: a3173a1e29d142541a086ed68c71981a, type: 2}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!114 &1455270941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455270935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1455270938}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 2
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1459170361 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7346621911048016329, guid: 5c065c5fd6773cd4b9bbf407882b34c5,
@@ -3016,6 +3095,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas About
       objectReference: {fileID: 0}
+    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
+        type: 3}
+      propertyPath: m_Name
+      value: About Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2012295557049550447, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3120,11 +3204,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
-        type: 3}
-      propertyPath: m_Name
-      value: About Button
       objectReference: {fileID: 0}
     - target: {fileID: 2012295557067339681, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
@@ -3308,6 +3387,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1096712249580386282, guid: ebef5845878e15344b5de3f27495a427,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9901f56fa6e92d24ea9f8d78df3230a9, type: 2}
     - target: {fileID: 5858695724107487058, guid: ebef5845878e15344b5de3f27495a427,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3328,11 +3412,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 363e9acbdf6b1864ebf41ee4213335a3, type: 2}
-    - target: {fileID: 1096712249580386282, guid: ebef5845878e15344b5de3f27495a427,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9901f56fa6e92d24ea9f8d78df3230a9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebef5845878e15344b5de3f27495a427, type: 3}
 --- !u!1 &1834885349
@@ -3657,6 +3736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
+        type: 3}
+      propertyPath: m_Name
+      value: Exit Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2012295557049550447, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3761,11 +3845,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
-        type: 3}
-      propertyPath: m_Name
-      value: Exit Button
       objectReference: {fileID: 0}
     - target: {fileID: 2012295557067339681, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
@@ -4493,6 +4572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas - Enter
       objectReference: {fileID: 0}
+    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
+        type: 3}
+      propertyPath: m_Name
+      value: Enter Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2012295557049550447, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4597,11 +4681,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2012295557820448825, guid: 222bbed77d4e4994d8d5eaefd2027e23,
-        type: 3}
-      propertyPath: m_Name
-      value: Enter Button
       objectReference: {fileID: 0}
     - target: {fileID: 2012295557067339681, guid: 222bbed77d4e4994d8d5eaefd2027e23,
         type: 3}
