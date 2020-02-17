@@ -15,7 +15,7 @@ using System.Windows;
 //https://www.youtube.com/watch?v=_QajrabyTJc
 
 
-public class FPLookAround : CharacterControllerLocalVS
+public class FPLookAround : MonoBehaviour
 {
     Camera followCamera;
     Transform playerTransform;
@@ -32,9 +32,16 @@ public class FPLookAround : CharacterControllerLocalVS
     public Vector2 mouseStartingPosition;
 
     float playerRotationAroundY;
-    float cameraRotationAroundX;
     Vector3 cameraRotationEuler;
 
+    Rigidbody rigidbody;
+    MovementController movementController;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        movementController = GetComponent<MovementController>();
+    }
     // Use this for initialization
     void Start()
     {
@@ -43,7 +50,7 @@ public class FPLookAround : CharacterControllerLocalVS
         zoomBounds = new Vector2(40, 80);
         startingFoV = 60;
 
-        Cursor.lockState =  CursorLockMode.Locked;
+        //Cursor.lockState =  CursorLockMode.Locked;
         followCamera = GetComponentInChildren<Camera>();
         playerTransform = transform;
         followCamera.fieldOfView = startingFoV;
@@ -53,7 +60,7 @@ public class FPLookAround : CharacterControllerLocalVS
     void Update()
     {
         //receive input in update
-        if (canMove)
+        if (movementController.canMove)
         {
             //angles are calculated here:
             PlayerTurnPrep();
@@ -67,7 +74,7 @@ public class FPLookAround : CharacterControllerLocalVS
     private void LateUpdate()
     {
         //execute on LateUpdate
-        if (canMove)
+        if (movementController.canMove)
         { 
             //actual turn of player
             playerTransform.Rotate(Vector3.up * playerRotationAroundY, Space.Self);

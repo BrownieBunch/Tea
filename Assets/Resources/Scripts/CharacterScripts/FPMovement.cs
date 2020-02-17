@@ -4,29 +4,27 @@ using UnityEngine;
 
 //This script controls movement of player in first person/3D mode.
 
-// Walking speed. Running Speed. Should running be shift + navigationals? 
 // Smooth transitions with GetAxis Raw and then Lerping? 
 
 
-public class FPMovement : CharacterControllerLocalVS
+public class FPMovement : MonoBehaviour
 {
+    public float walkingSpeed = 5;
+    public float runningSpeed = 10;
 
-    public bool isWalking;
-    public bool isRunning;
+    Rigidbody rigidbody;
+    MovementController movementController;
 
-    LevitateBehaviour levitateBehaviour;
-    JumpBehaviour jumpBehaviour;
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
-        levitateBehaviour = GetComponent<LevitateBehaviour>();
-        jumpBehaviour = GetComponent<JumpBehaviour>();
+        movementController = GetComponent<MovementController>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if ((canMove) && (!levitateBehaviour.islevitating))
+        if ((movementController.canMove) && (!movementController.isLevitating))
         { MoveOnLookAxis(); }
     }
 
@@ -41,40 +39,36 @@ public class FPMovement : CharacterControllerLocalVS
 
         if (translation.magnitude > 0)
         {
-        
-            if (jumpBehaviour.isJumping)
+
+            if ((movementController.isJumping) | (movementController.isFlyFlapping))
             {
                 speed = walkingSpeed;
-                isWalking = false;
-                isRunning = false;
+                movementController.isWalking = false;
+                movementController.isRunning = false;
             }
             else if (Input.GetKey(KeyMap.runningKey))
             {
                 speed = runningSpeed;
-                isRunning = true;
-                isWalking = false;
+                movementController.isRunning = true;
+                movementController.isWalking = false;
 
             }
             else
             {
                 speed = walkingSpeed;
-                isWalking = true;
-                isRunning = false;
+                movementController.isWalking = true;
+                movementController.isRunning = false;
             }
         }
         else
-        { 
-            isWalking = false; 
-            isRunning = false; 
+        {
+            movementController.isWalking = false;
+            movementController.isRunning = false; 
         }
 
     Vector3 finalTranslation = translation * speed * Time.fixedDeltaTime;
-
     Vector3 finalPosition = rigidbody.position + finalTranslation;
-      
-
     rigidbody.MovePosition(finalPosition);
-
     }
 
     

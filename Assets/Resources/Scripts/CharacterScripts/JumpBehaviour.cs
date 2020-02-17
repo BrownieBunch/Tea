@@ -3,28 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Jump and Float try with forces.
-public class JumpBehaviour : CharacterControllerLocalVS
+public class JumpBehaviour : MonoBehaviour
 {
-    //check for 
+    //
     public bool isGrounded;
     //
-    public bool isJumping;
+    public float jumpingForce = 3;
 
     public Transform feet;
-    LevitateBehaviour levitateBehaviour;
+
+    MovementController movementController;
+    Rigidbody rigidbody;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        movementController = GetComponent<MovementController>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        levitateBehaviour = GetComponent<LevitateBehaviour>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (!levitateBehaviour.islevitating)
+     if (movementController.canJump)
+        { 
+        if (!movementController.isLevitating)
         { 
         GroundCheck();
 
@@ -32,28 +39,24 @@ public class JumpBehaviour : CharacterControllerLocalVS
         {
             Debug.Log("Input for Jump.");
 
-
             if (isGrounded)
             {
                 JumpAction();
             }
+           }
         }
         }
-
     }
 
     void JumpAction()
     {
-        //correct this!!!
-        // rigidbody.transform.position += Vector3.up * Time.deltaTime * floatingSpeed;
-        //
         rigidbody.AddForce(Vector3.up * jumpingForce, ForceMode.Impulse);
         Debug.Log("Jump!");
     }
 
     void GroundCheck()
     {
-        //("Ground");
+        //"Ground";
         int layerIndex1 = 8;
         //Items
         int layerIndex2 = 9;
@@ -67,15 +70,15 @@ public class JumpBehaviour : CharacterControllerLocalVS
         Collider[] hitColliders = Physics.OverlapBox(feet.position, Vector3.one, Quaternion.identity, layerMask);
         if (hitColliders.Length != 0)
         { 
-            Debug.Log("Touching something " + hitColliders[0].gameObject.name);
+           // Debug.Log("Touching something " + hitColliders[0].gameObject.name);
             isGrounded = true;
-            isJumping = false;
+            movementController.isJumping = false;
 
         }
         else
         {
             isGrounded = false;
-            isJumping = true;
+            movementController.isJumping = true;
             Debug.Log("MidAir");
         }
 

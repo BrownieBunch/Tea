@@ -9,14 +9,14 @@ public class Hand : MonoBehaviour
 
     private float keyPressTimer = 0;
     private bool autoUpLock = false;
-    private InteractiveItem itemInHand = null;
+    public InteractiveItem ItemInHand { get; private set; }
 
     private void Update()
     {
         //+++ Carrying updates +++
-        if (itemInHand != null)
+        if (ItemInHand != null)
         {
-            itemInHand.transform.position = this.transform.position; //Sets the item to the hand location
+            ItemInHand.transform.position = this.transform.position; //Sets the item to the hand location
         }
         
         //+++ Key pressing Logic +++
@@ -43,11 +43,11 @@ public class Hand : MonoBehaviour
         if (hit.collider == null ) { return; } //User is looking at the sky, they can fuck off the cheeky frog
         
         //+++ Item In hand Logic +++ This will try to drop an item, then return, no other interaction takes place
-        if (itemInHand != null)
+        if (ItemInHand != null)
         {
-            if (itemInHand.SetAsPutDown())
+            if (ItemInHand.SetAsPutDown())
             {
-                itemInHand = null;
+                ItemInHand = null;
                 return;
             }
             Debug.Log("Failed to put down item, has the item pickup state been locked?");
@@ -88,7 +88,7 @@ public class Hand : MonoBehaviour
     {
         if (ii.SetAsPickedUp())
         {
-            itemInHand = ii; 
+            ItemInHand = ii; 
         }
     }
 }

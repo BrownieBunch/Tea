@@ -3,27 +3,19 @@ using System.Collections;
 
 public static class KeyMap
 { 
-    public static KeyCode pauseGameKey = KeyCode.Escape;
-    public static KeyCode runningKey = KeyCode.LeftShift;
-    public static KeyCode jumpingKey = KeyCode.Space;
-    public static KeyCode floatingKey = KeyCode.CapsLock;
-    public static KeyCode floatingKeyGoUp = KeyCode.Space;
-    public static KeyCode floatingKeyGoDown = KeyCode.LeftShift;
+    public const KeyCode pauseGameKey = KeyCode.Escape;
+    public const KeyCode runningKey = KeyCode.LeftShift;
+    public const KeyCode jumpingKey = KeyCode.Space;
+    public const KeyCode floatingKey = KeyCode.F;
+    public const KeyCode floatingKeyGoUp = KeyCode.Space;
+    public const KeyCode floatingKeyGoDown = KeyCode.LeftShift;  
+    public const KeyCode flyflappingKey = KeyCode.C;
 
-    public static KeyCode examineKey = KeyCode.E;
+    public const KeyCode InteractKey = KeyCode.E;
+    public const int LongPressThresholdInSeconds = 1;
 
     //Q for Querry
     //E for Engage
     //R for Retrieve and Renounce
     //F for float
-
-    //    public static KeyCode inspectKey = KeyCode.I;
-    //    public static KeyCode interactKey = KeyCode.?;
-    //    public static KeyCode interactKey = inspectKey;
-
-    //would it be better if we use the Q and E and R?
-    public static KeyCode pickUpKey = KeyCode.P;
-
-    public static KeyCode discardKey = pickUpKey; // KeyCode.D
-
 }

@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevitateBehaviour : CharacterControllerLocalVS
+public class LevitateBehaviour : MonoBehaviour
 {
-    public bool islevitating;
+    public float levitatingSpeed = 3;
+
+    MovementController movementController;
+
+    private void Awake()
+    {
+        movementController = GetComponent<MovementController>();
+    }
     // Use this for initialization
     void Start()
     {
@@ -13,9 +20,12 @@ public class LevitateBehaviour : CharacterControllerLocalVS
     // Update is called once per frame
     void Update()
     {
-        EnableLevitate();
 
-        if (islevitating)
+        if (movementController.canLevitate)
+        {
+            EnableLevitate();
+
+            if (movementController.isLevitating)
         {
             Vector3 upwards = Vector3.zero;
             if (Input.GetKey(KeyMap.floatingKeyGoUp))
@@ -30,13 +40,12 @@ public class LevitateBehaviour : CharacterControllerLocalVS
 
                 Vector3 forward = transform.forward * Input.GetAxis("Vertical");
                 Vector3 sideways = transform.right * Input.GetAxis("Horizontal");
-
                 Vector3 translation = (forward + sideways + upwards);
                 Vector3 finalTranslation = translation.normalized * levitatingSpeed * Time.fixedDeltaTime;
-                Vector3 finalPosition = rigidbody.position + finalTranslation;
-                rigidbody.MovePosition(finalPosition);
+                Vector3 finalPosition = GetComponent<Rigidbody>().position + finalTranslation;
+                GetComponent<Rigidbody>().MovePosition(finalPosition);
         }
-
+        }
     }
 
 
@@ -51,18 +60,17 @@ public class LevitateBehaviour : CharacterControllerLocalVS
 
     void GravityToggle()
     {
-        if (rigidbody.useGravity)
+        if (GetComponent<Rigidbody>().useGravity)
         {
-            rigidbody.useGravity = false;
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-
-            islevitating = true;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            movementController.isLevitating = true;
         }
         else
         {
-            rigidbody.useGravity = true;
-            islevitating = false;
+            GetComponent<Rigidbody>().useGravity = true;
+            movementController.isLevitating = false;
         }
     }
 

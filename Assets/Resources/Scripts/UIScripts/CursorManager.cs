@@ -37,13 +37,17 @@ public class CursorManager: MonoBehaviour
         //clean reset from previous state
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
+            Debug.Log("This is scene with index 0");
             ShowCursor();
         }
         else
-        { HideCursor(); }
+        { 
+           HideCursor(); 
+        }
 
         //this is the default cursor: 
         SimpleCursor();
+
     }
 
     public void SimpleCursor()
@@ -69,7 +73,7 @@ public class CursorManager: MonoBehaviour
     void HideCursor()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Debug.Log("Cursor hidden.");
     }
 
