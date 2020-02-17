@@ -35,12 +35,16 @@ public class GameStateManager : MonoBehaviour
         if (PausedOrNot)
         { 
         if (GamePausedEvent != null)
-        { GamePausedEvent(); }
+        { GamePausedEvent();
+                Debug.Log("GamePausedEvent");
+            }
         }
     else
         {
             if (GameUnPausedEvent != null)
-            { GameUnPausedEvent(); }
+            { GameUnPausedEvent();
+                Debug.Log("GameUnPausedEvent");
+            }
         }
     }
   

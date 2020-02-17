@@ -7,6 +7,9 @@ public static class KeyMap
     public static KeyCode runningKey = KeyCode.LeftShift;
     public static KeyCode jumpingKey = KeyCode.Space;
     public static KeyCode floatingKey = KeyCode.CapsLock;
+    public static KeyCode floatingKeyGoUp = KeyCode.Space;
+    public static KeyCode floatingKeyGoDown = KeyCode.LeftShift;
+
     public static KeyCode examineKey = KeyCode.E;
 
     //Q for Querry

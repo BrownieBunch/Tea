@@ -23,7 +23,8 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField]
     bool isConfirm;
 
-    public bool showGameObject;
+    public bool popsUpAnotherGameObject;
+    public bool hidesSelf;
     public bool hidesParentGameObject;
     public GameObject popUpGameObject;
 
@@ -75,14 +76,19 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
             audioManagerSoundEffects.PlaySoundEffect(cancelOnClick);
         }
 
-        if (showGameObject)
+        if (popsUpAnotherGameObject)
         {
             ShowPopUp();
         }
-        else if (hidesParentGameObject)
+        if (hidesParentGameObject)
         {
             HideParentGameObject();
         }
+        if (hidesSelf)
+        { 
+            HideSelf(); 
+        }
+
     }
 
     void ShowPopUp()
@@ -108,5 +114,10 @@ public class ButtonScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
         }
 
+    }
+
+    void HideSelf()
+    {
+        this.gameObject.active = false;
     }
 }

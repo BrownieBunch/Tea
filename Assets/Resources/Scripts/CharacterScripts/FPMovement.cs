@@ -8,21 +8,25 @@ using UnityEngine;
 // Smooth transitions with GetAxis Raw and then Lerping? 
 
 
-public class FPMovement : CharacterController
+public class FPMovement : CharacterControllerLocalVS
 {
 
     public bool isWalking;
     public bool isRunning;
 
+    LevitateBehaviour levitateBehaviour;
+    JumpBehaviour jumpBehaviour;
     public override void Awake()
     {
         base.Awake();
+        levitateBehaviour = GetComponent<LevitateBehaviour>();
+        jumpBehaviour = GetComponent<JumpBehaviour>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canMove)
+        if ((canMove) && (!levitateBehaviour.islevitating))
         { MoveOnLookAxis(); }
     }
 
@@ -32,13 +36,19 @@ public class FPMovement : CharacterController
     Vector3 forward = transform.forward * Input.GetAxis("Vertical");
     Vector3 sideways = transform.right * Input.GetAxis("Horizontal");
 
-        Vector3 translation = (forward + sideways) ;
+    Vector3 translation = (forward + sideways).normalized ;
         float speed = 0;
 
         if (translation.magnitude > 0)
         {
         
-            if (Input.GetKey(KeyMap.runningKey))
+            if (jumpBehaviour.isJumping)
+            {
+                speed = walkingSpeed;
+                isWalking = false;
+                isRunning = false;
+            }
+            else if (Input.GetKey(KeyMap.runningKey))
             {
                 speed = runningSpeed;
                 isRunning = true;
@@ -58,12 +68,13 @@ public class FPMovement : CharacterController
             isRunning = false; 
         }
 
-    Vector3 finalTranslation = (forward + sideways) * speed * Time.fixedDeltaTime;
+    Vector3 finalTranslation = translation * speed * Time.fixedDeltaTime;
 
     Vector3 finalPosition = rigidbody.position + finalTranslation;
       
 
-        rigidbody.MovePosition(finalPosition);
+    rigidbody.MovePosition(finalPosition);
+
     }
 
     
