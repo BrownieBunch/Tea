@@ -8,11 +8,9 @@ public class CharacterController : MonoBehaviour
     public float walkingSpeed;
     public float runningSpeed;
     public float floatingSpeed;
-
-
-    [HideInInspector]
-    public Rigidbody rigidbody;
-    public Collider collider;
+    
+    protected Rigidbody rigidbody;
+    protected Collider collider;
 
     public virtual void Awake()
     {

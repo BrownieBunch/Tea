@@ -191,6 +191,10 @@ GameObject:
   - component: {fileID: 2997490263810401630}
   - component: {fileID: 1948200568155062679}
   - component: {fileID: 6188602337092160178}
+  - component: {fileID: 1078934061142432903}
+  - component: {fileID: 7433674954744563893}
+  - component: {fileID: 6006400942618553987}
+  - component: {fileID: 2789262706215206329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -281,10 +285,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2997490263810401623}
   serializedVersion: 2
-  m_Mass: 0.0000001
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -301,12 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc144af8d01312843911993233d5b254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 0
-  runningSpeed: 0
+  walkingSpeed: 5
+  runningSpeed: 10
   floatingSpeed: 0
   rigidbody: {fileID: 0}
   collider: {fileID: 0}
-  isMoving: 0
+  isWalking: 0
+  isRunning: 0
 --- !u!114 &2997490263810401630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,11 +345,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 821890373817294606, guid: 866ae6b4259a2794cbcf0111be3974a4,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 661bc9f04e00a6543a225b534a5f0fa6, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -438,3 +443,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83918fd74a2cf5c4a8ed4e0379d4eff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingSound: {fileID: 8300000, guid: 661bc9f04e00a6543a225b534a5f0fa6, type: 3}
+  runningSound: {fileID: 8300000, guid: 6f4ea4230cc180f40a0161a2cfc2332c, type: 3}
+  jumpingSound: {fileID: 0}
+--- !u!114 &1078934061142432903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997490263810401623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65dfef2c616e9ed43adbda66ab6c13ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 0
+  runningSpeed: 0
+  floatingSpeed: 10
+  rigidbody: {fileID: 0}
+  collider: {fileID: 0}
+  isfloating: 0
+--- !u!114 &7433674954744563893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997490263810401623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4245efd0fa723f42928ca83f103d1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 0
+  runningSpeed: 0
+  floatingSpeed: 0
+  rigidbody: {fileID: 0}
+  collider: {fileID: 0}
+  isTouchingGround: 1
+  jumpForce: 5
+--- !u!114 &6006400942618553987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997490263810401623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695ed1e96dc42ad4688f7265a2255143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 0
+  runningSpeed: 0
+  floatingSpeed: 0
+  rigidbody: {fileID: 0}
+  collider: {fileID: 0}
+--- !u!65 &2789262706215206329
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997490263810401623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
