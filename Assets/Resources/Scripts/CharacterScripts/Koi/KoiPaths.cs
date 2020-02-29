@@ -17,10 +17,18 @@ public class KoiPaths : MonoBehaviour
         // points = GetComponentsInChildren<Transform>();
         //only children
         points = transform.Cast<Transform>().ToArray();
+        //or
+        /*
+        Vector3[] waypoints = new Vector3[pathHolder.childCount];
+		for (int i = 0; i < waypoints.Length; i++) {
+			waypoints [i] = pathHolder.GetChild (i).position;
+			waypoints [i] = new Vector3 (waypoints [i].x, transform.position.y, waypoints [i].z);
+		}
+        */
     }
-   
+
     // Start is called before the first frame update
-  
+
     void Start()
     {
         foreach (Transform point in points)
@@ -35,5 +43,7 @@ public class KoiPaths : MonoBehaviour
     {
         
     }
+
+
 
 }

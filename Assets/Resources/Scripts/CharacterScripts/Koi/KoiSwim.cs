@@ -8,16 +8,16 @@ public class KoiSwim : MonoBehaviour
 		public float waitTime = .3f;
 		public float turnSpeed = 90;
 
-		public Transform pathHolder;
-
+		public Transform pointHolder;
+		public Transform[] randomPath;
 		void Start()
 		{
-
-			Vector3[] waypoints = new Vector3[pathHolder.childCount];
+		//NOT FINISHED!!!
+			Vector3[] waypoints = new Vector3[pointHolder.childCount];
 			for (int i = 0; i < waypoints.Length; i++)
 			{
-				waypoints[i] = pathHolder.GetChild(i).position;
-				waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+				waypoints[i] = pointHolder.GetChild(i).position;
+				waypoints[i] = new Vector3(waypoints[i].x, waypoints[i].y, waypoints[i].z);
 			}
 
 			StartCoroutine(FollowPath(waypoints));
@@ -37,7 +37,9 @@ public class KoiSwim : MonoBehaviour
 				transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
 				if (transform.position == targetWaypoint)
 				{
-					targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
+				//serial
+				//targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
+					targetWaypointIndex = Random.Range(0, waypoints.Length - 1);
 					targetWaypoint = waypoints[targetWaypointIndex];
 					yield return new WaitForSeconds(waitTime);
 					yield return StartCoroutine(TurnToFace(targetWaypoint));
@@ -61,10 +63,10 @@ public class KoiSwim : MonoBehaviour
 
 		void OnDrawGizmos()
 		{
-			Vector3 startPosition = pathHolder.GetChild(0).position;
+			Vector3 startPosition = pointHolder.GetChild(0).position;
 			Vector3 previousPosition = startPosition;
 
-			foreach (Transform waypoint in pathHolder)
+			foreach (Transform waypoint in pointHolder)
 			{
 				Gizmos.DrawSphere(waypoint.position, .3f);
 				Gizmos.DrawLine(previousPosition, waypoint.position);

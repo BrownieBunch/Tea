@@ -11,7 +11,7 @@ public class KoiCircleSwim : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-               transform.position = new Vector3(pivotPoint.position.x + radius, pivotPoint.position.y, pivotPoint.position.z);
+       transform.position = new Vector3(pivotPoint.position.x + radius, pivotPoint.position.y, pivotPoint.position.z);
     }
 
     // Update is called once per frame
