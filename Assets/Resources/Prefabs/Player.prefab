@@ -321,10 +321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bbe62770866fa44bb5e2e346818670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 0
-  canJump: 0
-  canLevitate: 0
-  canFlapFly: 0
+  canMove: 1
+  canJump: 1
+  canLevitate: 1
+  canFlapFly: 1
   isWalking: 0
   isRunning: 0
   isJumping: 0
@@ -417,3 +417,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkingGeneric: event:/TestWalking
+  WalkingLengthSeconds: 5.6

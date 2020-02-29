@@ -42,6 +42,4 @@ public class Brain : MonoBehaviour
     {
         Health += seconds;
     }
-
-
 }

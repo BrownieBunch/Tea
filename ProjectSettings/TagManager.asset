@@ -4,11 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
   - InteractableItem
-  - NPC
-  - FullScreenOverLay
   - Brain
+  - FullScreenOverLay
   layers:
   - Default
   - TransparentFX
@@ -19,9 +17,9 @@ TagManager:
   - 
   - 
   - Ground
-  - Items
-  - PostProcessing
-  - Invisible Player
+  - InteractiveObject
+  - 
+  - 
   - 
   - 
   - 
