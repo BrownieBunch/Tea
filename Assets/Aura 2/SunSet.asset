@@ -16,8 +16,8 @@ MonoBehaviour:
   density: 0.2
   useScattering: 1
   scattering: 0.5
-  useAmbientLighting: 0
-  ambientLightingStrength: 0.39
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
   useColor: 0
   color: {r: 0.0000005066395, g: 0.5, b: 0.5, a: 1}
   colorStrength: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   tint: {r: 0.999999, g: 0.9215677, b: 0.015686257, a: 1}
   tintStrength: 1
   useExtinction: 1
-  extinction: 0.13999999
+  extinction: 0.13
