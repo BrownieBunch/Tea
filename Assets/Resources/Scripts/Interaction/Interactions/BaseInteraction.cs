@@ -9,7 +9,7 @@ namespace Resources.Scripts.Interaction.Interactions
         [SerializeField]
         private InteractionType type;
         public InteractionType Type => type;
-        
+
         [SerializeField]
         private BrainState affectedBrainState;
         public BrainState AffectedBrainState => affectedBrainState;
