@@ -26,10 +26,11 @@ public class KoiSwim : MonoBehaviour
 		IEnumerator FollowPath(Transform[] waypoints)
 		{
 			transform.position = waypoints[0].position;
-
+		    Vector3 previousPoint = waypoints[0].position;
 			int targetWaypointIndex = 1;
 			Vector3 targetWaypoint = waypoints[targetWaypointIndex].position;
-			transform.LookAt(targetWaypoint);
+			//transform.LookAt(previousPoint);
+			StartCoroutine(TurnToFace(previousPoint));
 
 			while (true)
 			{
@@ -48,7 +49,7 @@ public class KoiSwim : MonoBehaviour
 
 		IEnumerator TurnToFace(Vector3 lookTarget)
 		{
-			Vector3 dirToLookTarget = (lookTarget - transform.position).normalized;
+			Vector3 dirToLookTarget = (-lookTarget + transform.position).normalized;
 			float targetAngle = 90 - Mathf.Atan2(dirToLookTarget.z, dirToLookTarget.x) * Mathf.Rad2Deg;
 
 			while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f)

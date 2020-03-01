@@ -5,8 +5,8 @@ using System.Linq;
 
 public class KoiPaths : MonoBehaviour
 {
-    float upperLimit = 4f;
-    float lowerLimit = -4f;
+    float upperLimit = 2f;
+    float lowerLimit = -2f;
    
     Transform[] points;
     
