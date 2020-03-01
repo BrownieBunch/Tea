@@ -9,38 +9,36 @@ public class KoiSwim : MonoBehaviour
 		public float turnSpeed = 90;
 
 		public Transform pointHolder;
-		public Transform[] randomPath;
-		void Start()
-		{
-		//NOT FINISHED!!!
-			Vector3[] waypoints = new Vector3[pointHolder.childCount];
-			for (int i = 0; i < waypoints.Length; i++)
-			{
-				waypoints[i] = pointHolder.GetChild(i).position;
-				waypoints[i] = new Vector3(waypoints[i].x, waypoints[i].y, waypoints[i].z);
-			}
+		public Transform[] path;
 
-			StartCoroutine(FollowPath(waypoints));
+	void Start()
+	{
+		path = new Transform[pointHolder.childCount];
+		for (int i = 0; i < pointHolder.childCount; i++)
+		{ 
+			 path[i] = pointHolder.GetChild(Random.Range(0, pointHolder.childCount - 1));
+		}
+
+     	StartCoroutine(FollowPath(path));
 
 		}
 
-		IEnumerator FollowPath(Vector3[] waypoints)
+		IEnumerator FollowPath(Transform[] waypoints)
 		{
-			transform.position = waypoints[0];
+			transform.position = waypoints[0].position;
 
 			int targetWaypointIndex = 1;
-			Vector3 targetWaypoint = waypoints[targetWaypointIndex];
+			Vector3 targetWaypoint = waypoints[targetWaypointIndex].position;
 			transform.LookAt(targetWaypoint);
 
 			while (true)
 			{
 				transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
-				if (transform.position == targetWaypoint)
-				{
-				//serial
-				//targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
-					targetWaypointIndex = Random.Range(0, waypoints.Length - 1);
-					targetWaypoint = waypoints[targetWaypointIndex];
+			if  (Mathf.Approximately(transform.position.x, targetWaypoint.x))
+		{
+				    Debug.Log(this.gameObject.name + "has arrived at node " + targetWaypointIndex + ".");
+				    targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
+					targetWaypoint = waypoints[targetWaypointIndex].position;
 					yield return new WaitForSeconds(waitTime);
 					yield return StartCoroutine(TurnToFace(targetWaypoint));
 				}
@@ -53,7 +51,7 @@ public class KoiSwim : MonoBehaviour
 			Vector3 dirToLookTarget = (lookTarget - transform.position).normalized;
 			float targetAngle = 90 - Mathf.Atan2(dirToLookTarget.z, dirToLookTarget.x) * Mathf.Rad2Deg;
 
-			while (Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle) > 0.05f)
+			while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f)
 			{
 				float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
 				transform.eulerAngles = Vector3.up * angle;
@@ -63,16 +61,19 @@ public class KoiSwim : MonoBehaviour
 
 		void OnDrawGizmos()
 		{
-			Vector3 startPosition = pointHolder.GetChild(0).position;
+		if (path.Length != 0)
+		{ 
+			Vector3 startPosition = path[0].position;
 			Vector3 previousPosition = startPosition;
 
-			foreach (Transform waypoint in pointHolder)
+			foreach (Transform point in path)
 			{
-				Gizmos.DrawSphere(waypoint.position, .3f);
-				Gizmos.DrawLine(previousPosition, waypoint.position);
-				previousPosition = waypoint.position;
+				Gizmos.DrawSphere(point.position, .3f);
+				Gizmos.DrawLine(previousPosition, point.position);
+				previousPosition = point.position;
 			}
 			Gizmos.DrawLine(previousPosition, startPosition);
 		}
-
 	}
+
+}
